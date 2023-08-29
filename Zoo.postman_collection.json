@@ -1,0 +1,211 @@
+{
+	"info": {
+		"_postman_id": "25055fbf-7821-46eb-a90f-2a4efe23b626",
+		"name": "Zoo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29269777"
+	},
+	"item": [
+		{
+			"name": "Get registered animals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{host}}/animals"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Lion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Lion&averageWeight=150-250kg&color=Yellow-Brown",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Lion"
+						},
+						{
+							"key": "averageWeight",
+							"value": "150-250kg"
+						},
+						{
+							"key": "color",
+							"value": "Yellow-Brown"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Tiger",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Tiger&averageWeight=180-306kg&color=Orange-Black",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Tiger"
+						},
+						{
+							"key": "averageWeight",
+							"value": "180-306kg"
+						},
+						{
+							"key": "color",
+							"value": "Orange-Black"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Elephant",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Elephant&averageWeight=4,500-6,800 kg&color=Gray",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Elephant"
+						},
+						{
+							"key": "averageWeight",
+							"value": "4,500-6,800 kg"
+						},
+						{
+							"key": "color",
+							"value": "Gray"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Giraffe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Giraffe&averageWeight=1,200-1,800 kg&color=Yellow-Spotted",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Giraffe"
+						},
+						{
+							"key": "averageWeight",
+							"value": "1,200-1,800 kg"
+						},
+						{
+							"key": "color",
+							"value": "Yellow-Spotted"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Panda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Panda&averageWeight=85kg&color=Black-White",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Panda"
+						},
+						{
+							"key": "averageWeight",
+							"value": "85kg"
+						},
+						{
+							"key": "color",
+							"value": "Black-White"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Red Panda",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/animal?species=Red Panda&averageWeight=6kg&color=Red-Black-White",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"animal"
+					],
+					"query": [
+						{
+							"key": "species",
+							"value": "Red Panda"
+						},
+						{
+							"key": "averageWeight",
+							"value": "6kg"
+						},
+						{
+							"key": "color",
+							"value": "Red-Black-White"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000"
+		}
+	]
+}

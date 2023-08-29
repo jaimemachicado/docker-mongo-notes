@@ -1,0 +1,24 @@
+#Indicamos imagen base
+FROM node:18
+
+#instalamos nodemon para que detecte los cambios en la app
+RUN npm i -g nodemon
+#Creamos carpeta para crear el contenedor
+RUN mkdir -p /home/app
+
+#Se establece el directorio de trabajo
+WORKDIR /home/app
+
+# Al establecer el directorio de trabajo ya no necesitamos indicar dónde copiar el código a usar
+#COPY . /home/app
+
+#Exponer un purto para conectarse al contenedor
+EXPOSE 3000
+
+#Comando que debe ejecutar para ejecutar la aplicación con nodemon ["<comando>","<nombre del fichero ya que ya estamos dentro de un directorio de trabajo>"]
+#Necesaria la opción -L
+#In some networked environments (such as a container running nodemon reading across a mounted drive), you will need to use the legacyWatch: true which enables Chokidar's polling.
+#Via the CLI, use either --legacy-watch or -L for short
+CMD [ "nodemon", "-L", "index.js"]
+
+

@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  chanchito:
+    build:
+      context: . #Donde se encuentra el código
+      dockerfile: Dockerfile-dev #Fichero de donde debe consultar la info
+    ports:
+      - "3000:3000" #Mapeo de los puertos para la aplicación
+    links:
+      - monguito
+    volumes:
+      - .:/home/app #volumen anónimo
+  monguito:
+    image: mongo #imagen base con la que se crea
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=jaime
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    volumes: #Referencia a los volumes definidos más abajo
+      - mongo-data:/data/db # ruta por defecto donde guarda mongo los datos
+      # ruta por defecto para mysql -> /var/lib/mysql
+      # ruta por defecto para postgres -> /var/lib/postgresql/data
+volumes:
+  mongo-data:

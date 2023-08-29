@@ -21,7 +21,7 @@ Esto generará todo lo necesario para poder realizar las siguientes llamadas en 
 | POST   | http://localhost:3000/animal?species=Lion&averageWeight=150-250kg&color=Yellow-Brown | Esto registraría un nuevo animal León en el zoo con los datos que le pasamos como query params |
 
 
-> **Nota:** Se incluye en la carpeta "postman", la colección y las variables que se pueden importar en postman y que tiene ya especificado el endpoint para listar los animales y crear una serie de animales.
+> **Nota:** Se incluye la colección "Zoo.postman_collection.json" que se pueden importar en postman y que tiene ya especificado el endpoint para listar los animales y crear una serie de animales.
 
 >Cadena de conexión con mongosh:
 >* mongodb://jaime:password@127.0.0.1:27017/zoo?authSource=admin

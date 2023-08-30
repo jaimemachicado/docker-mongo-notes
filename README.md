@@ -21,7 +21,7 @@ Esto generará todo lo necesario para poder realizar las siguientes llamadas en 
 | POST   | http://localhost:3000/animal?species=Lion&averageWeight=150-250kg&color=Yellow-Brown | Esto registraría un nuevo animal León en el zoo con los datos que le pasamos como query params |
 
 
-> **Nota:** Se incluye la colección "Zoo.postman_collection.json" que se pueden importar en postman y que tiene ya especificado el endpoint para listar los animales y crear una serie de animales.
+> **Nota:** Se incluye en la carpeta "postman", la colección y las variables que se pueden importar en postman y que tiene ya especificado el endpoint para listar los animales y crear una serie de animales.
 
 >Cadena de conexión con mongosh:
 >* mongodb://jaime:password@127.0.0.1:27017/zoo?authSource=admin
@@ -185,76 +185,150 @@ La opción --build ejecuta una construcción en docker
 ## Consulta
 * db.<nombre_coleccion>.find({<clave_x>:<valor_x>})
 
->**Operadores de consulta:**
->* $eq -> igual a
->* $ne -> no igual a
->* $gt -> mayor que
->* $gte -> mayor o igual que
->* $lt -> menor que
->* $lte -> menor o igual que
->* $in -> en un conjunto de valores
->* $nin -> no esta en un conjunto de valores
->
-> Ejemplo:
-> * db.animals.find({species:{$eq:'Giraffe'}})
+### Operadores de consulta:
+* $eq -> igual a
+* $ne -> no igual a
+* $gt -> mayor que
+* $gte -> mayor o igual que
+* $lt -> menor que
+* $lte -> menor o igual que
+* $in -> en un conjunto de valores
+* $nin -> no esta en un conjunto de valores
 
->**Operadores lógicos:**
->* $and
->* $or -> o lógico
->* $not
->* $nor -> ni lógico
->
-> Ejemplo:
-> * db.animals.find({$or: [{species:'Panda'},{species:'Giraffe'}]})
+Ejemplo:
+* db.animals.find({species:{$eq:'Giraffe'}})
 
->**Operadores de elementos:**
->* $exists -> verifica si un campo existe o no en un documento
->* $type -> verifica si un campo tiene un tipo de datos específico
->
->Ejemplo:
->* db.animals.find({species:{$exists:true}})
+### Operadores lógicos:
+* $and
+* $or -> o lógico
+* $not
+* $nor -> ni lógico
 
->**Operadores de arrays:**
->* $all -> coincide con documentos donde un campo contiene todos los elementos del array
->* $size -> coincide con documentos donde un campo de array tiene un tamaño específico
->* $elementMatch -> coincide con documentos donde un campo de array contiene al menos un elemento que cumple con todas las condiciones especificadas
->
->Ejemplo que encuentra documentos que tengan un array del campo "studies" con tamaño 2:
->db.myCollection.find({studies:{$size:2}})
+ Ejemplo:
+ * db.animals.find({$or: [{species:'Panda'},{species:'Giraffe'}]})
 
->**Operadores de evaluación:**
->* $mod -> coincide con documentos donde un campo dividido por un divisor tiene un residuo específico
->* $regex -> coincide con documentos donde un campo coincide con una expresión regular
->* $text -> realiza una búsqueda de texto en los campos indexados por texto
->
->Ejemplo para encontrar documentos que contengan en el campo "species" una "P"
->* db.animals.find({species:{$regex:/P/i}})
+### Operadores de elementos:
+* $exists -> verifica si un campo existe o no en un documento
+* $type -> verifica si un campo tiene un tipo de datos específico
 
->**Operadores geoespaciales:**
->* $geoWithin -> coincide con documentos donde un campo de geometría está completamente dentro de una geometría especificada
->* $geoIntersects -> coincide con documentos donde un campo de geometría se cruza con una geometría especificada
->* $near -> coincide con documentos donde un campo de geometría está cerca de un punto especificado, requiere un índice geoespacial para poder utiliarlo
->* $nearSphere -> similar a $near, pero considera la geometría esférica
+Ejemplo:
+* db.animals.find({species:{$exists:true}})
 
->**Proyecciones:**
->Las proyecciones permiten especificar qué campos deben incluirse o excluirse en los resultados de una consulta. Para incluir un campo, establece su valor en 1 y para excluirlo en 0.
->* Ejemplo en el que cabe destacar que solo el campo _id es el único que deja excluir específicamente y que, si no lo excluyes, se devolverá igualmente en cualquier consulta:
->   *  db.animals.find({},{species:1,color:1,_id:0})
+### Operadores de arrays:
+* $all -> coincide con documentos donde un campo contiene todos los elementos del array
+* $size -> coincide con documentos donde un campo de array tiene un tamaño específico
+* $elementMatch -> coincide con documentos donde un campo de array contiene al menos un elemento que cumple con todas las condiciones especificadas
+
+Ejemplo que encuentra documentos que tengan un array del campo "studies" con tamaño 2:
+db.myCollection.find({studies:{$size:2}})
+
+### Operadores de evaluación:
+* $mod -> coincide con documentos donde un campo dividido por un divisor tiene un residuo específico
+* $regex -> coincide con documentos donde un campo coincide con una expresión regular
+* $text -> realiza una búsqueda de texto en los campos indexados por texto
+
+Ejemplo para encontrar documentos que contengan en el campo "species" una "P"
+* db.animals.find({species:{$regex:/P/i}})
+
+### Operadores geoespaciales:
+* $geoWithin -> coincide con documentos donde un campo de geometría está completamente dentro de una geometría especificada
+* $geoIntersects -> coincide con documentos donde un campo de geometría se cruza con una geometría especificada
+* $near -> coincide con documentos donde un campo de geometría está cerca de un punto especificado, requiere un índice geoespacial para poder utiliarlo
+* $nearSphere -> similar a $near, pero considera la geometría esférica
+
+### Proyecciones:
+Las proyecciones permiten especificar qué campos deben incluirse o excluirse en los resultados de una consulta. Para incluir un campo, establece su valor en 1 y para excluirlo en 0.
+* Ejemplo en el que cabe destacar que solo el campo _id es el único que deja excluir específicamente y que, si no lo excluyes, se devolverá igualmente en cualquier consulta:
+   *  db.animals.find({},{species:1,color:1,_id:0})
 
 
->**Ordenar:**
->* sort() -> Ordena los resultados de acuerdo con el valor 1 para ascendente o -1 para descendente
->   * Ejemplo: db.animals.find().sort({species:-1})
->* limit(<numero_resultados>) -> Limita el número de resultados
->   * Ejemplo: db.animals.find().limit(2)
->* skip(<numero_saltos>) -> Omite una cantidad específica de resultados
->   * Ejemplo: db.animals.find().skip(2)
->
-> OJO: no importa el orden en el que se pongan sort, limit y skip, siempre se ejecutará primero el sort, después skip y, por último, limit si se ejecutan de forma combinada.
+### Ordenar:
+* sort() -> Ordena los resultados de acuerdo con el valor 1 para ascendente o -1 para descendente
+   * Ejemplo: db.animals.find().sort({species:-1})
+* limit(<numero_resultados>) -> Limita el número de resultados
+   * Ejemplo: db.animals.find().limit(2)
+* skip(<numero_saltos>) -> Omite una cantidad específica de resultados
+   * Ejemplo: db.animals.find().skip(2)
 
->**Indexación:**
+ OJO: no importa el orden en el que se pongan sort, limit y skip, siempre se ejecutará primero el sort, después skip y, por último, limit si se ejecutan de forma combinada.
 
->**Agregación:**
+### Indexación:
+La indexación mejora la eficiencia y velocidad en las consultas. Cuando se crea un índice en uno o más campos, MongoDB crea una estructura de datos que almacena una parte de los documentos en un orden específico que facilita la búsqueda y recuperación.
 
->**Transacciones:**
+#### **Tipos de indices:**
+* **Simple**: 
+    * Índice de un solo campo. 
+    * Las consultas que utilizan ese campo pueden aprovechar el índice para mejorar su rendimiento
+* **Compuesto**: 
+    * Índice en varios campos. 
+    * Las consultas que utilizan cualquiera de dichos campos o una combinación de ellos pueden aprovechar este índice. 
+    * Estos índices son útiles cuando se realizan consultas con varias condiciones.
+* **Wilcard** (comodín): 
+    * Permite indexar un número desconocido de campos en un documento sin tener que especificar cada uno de ellos individualmente. 
+    * Es útil cuando se trabaja con documentos que tienen un gran número de campos o campos que varían entre documentos. 
+    * El índice comodín indexa todos los campos o un subconjunto de campos que coincidan con un patrón específico. 
+    * Para crear este índice se utiliza el operador **$\*\*** en la especificación del índice.
+* **Texto**
+    * Se utilizan para realizar búsquedas de texto en campos de texto.
+    * Ayudan a acelerar las consultas que utilizan el operador **$text** para buscar palabras clave o frases en campos de texto
+* **Geoespaciales**
+    * Existen dos tipos:
+        * 2d --> Almacenan puntos en un plano bidimensional
+        * 2dsphere --> Almacenan datos geoespaciales en una esfera tridimensional, como la Tierra.
+    * Se utilizan para acelerar consultas geoespaciales que utilizan operadores como **$near**, **$geoWithin** y **$geoIntersects**
+* **Hashed**
+    * Almacenan el valor hash de un campo específico en  lugar del valor original.
+    * Útiles para acelerar las consultas de igualdad en campos específicos y son especialmente importantes en entornos de clústeres de fragmentos (shared clusters)
+
+#### **Crear y administrar índices**
+* Crear un índice en una colección
+    * db.animals.createIndex({species:1}) //Crea índice ascendente en el campo "species"
+* Crear un índice compuestos
+    * db.animals.createIndex({averageWeight:1,color:-1})
+* Ver todos los índices de una colección
+    * db.animals.getIndexes()
+* Eliminar un índice
+    * db.animals.dropIndex("species_1")
+
+#### **Inexación de texto y búsqueda de texto completo**
+* Crear indice --> db.animals.createIndex({species:"text"})
+* Búsqueda usando ese índice --> db.animals.find({$text:{$search:"Panda"}})
+
+#### **Ejemplos**
+* Índice simple: en la colección "animals", crea un índice en el campo "color".
+```console
+db.animals.createIndex({color:1})
+db.animals.find().sort({color:1})
+````
+
+* Índice compuesto: En la colección "animals", crea un índice en los campos "species" y "color"
+```console
+db.animals.createIndex({species:1,color:1})
+db.animals.find().sort({species:1,color:1})
+```
+
+* Índice de texto: En la colección "animals", se crea un índice en el campo "species"
+````console
+db.animals.createIndex({species:"text"})
+db.animals.find({$text:{$search: "panda"}})
+````
+
+* Índice geoespacial
+````console
+
+````
+
+* Índice 
+````console
+
+````
+
+* Índice 
+````console
+
+````
+
+### Agregación:
+
+### Transacciones:
 
